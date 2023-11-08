@@ -1,0 +1,115 @@
+#include<stdio.h> 
+#include<stdlib.h> 
+struct node 
+{ 
+ int data; 
+ struct node *next; 
+}; 
+struct node *head=NULL; 
+void begins(); 
+void begdel(); 
+void display(); 
+int main() 
+{ 
+ int choice; 
+ clrscr(); 
+ do 
+ { 
+ printf("\n **********MAIN MENU **********"); 
+ printf("\n1.insert at beg\n 2.delete at beg\n 3.Show\n4.exit\n"); 
+ printf("\n Enetr your choice:"); 
+ scanf("%d",&choice); 
+ switch(choice) 
+ { 
+ case 1:begins(); 
+ break; 
+ case 2:begdel(); 
+ break; 
+ case 3:display(); 
+ break; 
+ case 4:exit(0); 
+ break; 
+ default:printf("\n Invalid choice...."); 
+ } 
+ }while(choice!=4); 
+ getch(); 
+ return 0; 
+} 
+void begins() 
+{ 
+ int num; 
+ struct node *ptr,*newnode; 
+ printf("\n Enter value:"); 
+ scanf("%d",&num); 
+ newnode=(struct node*)malloc(sizeof(struct node)); 
+ newnode->data=num; 
+ ptr=head; 
+ if(head==NULL) 
+ { 
+ head=newnode; 
+ newnode->next=head; 
+ } 
+ else 
+ { 
+ while(ptr->next!=head) 
+ { 
+ ptr=ptr->next; 
+ } 
+ ptr->next=newnode; 
+ newnode->next=head; 
+ head=newnode; 
+ } 
+ printf("\n Node inserted"); 
+} 
+void begdel() 
+{ 
+ struct node *ptr; 
+ if(head==NULL) 
+ { 
+ printf("\n underflow"); 
+ } 
+ else if(head->next==head) 
+ { 
+ head=NULL; 
+ free(head); 
+ printf("\n Node deleted"); 
+ } 
+ else 
+ { 
+ ptr=head; 
+ while(ptr->next!=head) 
+ { 
+ ptr=ptr->next; 
+ } 
+ ptr->next=head->next; 
+ free(head); 
+ head=ptr->next; 
+ printf("\nNode deleted"); 
+ } 
+} 
+void display() 
+{ 
+ struct node *ptr; 
+ ptr=head; 
+ if(head==NULL) 
+ { 
+ printf("\n List is empty"); 
+ } 
+ else 
+ { 
+ printf("\n Printing values.........."); 
+ if(ptr->next==head) 
+ { 
+ printf("\t %d",ptr->data); 
+ } 
+ else 
+ { 
+ while(ptr->next!=head) 
+ { 
+ printf("\t %d",ptr->data); 
+ ptr=ptr->next; 
+ } 
+ printf("\t %d",ptr->data); 
+ } 
+ } 
+} 
