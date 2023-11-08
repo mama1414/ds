@@ -41,4 +41,21 @@ void main()
  top=top+1; 
  stack[top]=val; 
  } 
- }
+ } 
+ void pop() 
+ { 
+ if(top==-1) 
+ printf("\n UNDERFLOW"); 
+ else 
+ { 
+ top=top-1; 
+ } 
+ } 
+ void show() 
+ { 
+ for(i=top;i>=0;i--) 
+ { 
+ printf("%d \n",stack[i]); 
+ } 
+ if(top==-1) 
+ printf("\n Stack is empty"); 
