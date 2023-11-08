@@ -1,0 +1,78 @@
+#include<stdio.h> 
+#include<conio.h> 
+struct node 
+{ 
+ int data; 
+ struct node *next; 
+}; 
+struct node *head; 
+void begins(); 
+void begdel(); 
+void display(); 
+void main() 
+{ 
+ int choice=0; 
+ while(choice!=4) 
+ { 
+ printf("\n *****MAIN MENU***"); 
+ printf("\n 1.Insrt at beg\n 2.Delete at beg\n 3.Show\n4.Exit"); 
+ printf("\n enter your choice:"); 
+ scanf("%d",&choice); 
+ switch(choice) 
+ { 
+ case 1:begins(); 
+ break; 
+ case 2:begdel(); 
+ break; 
+ case 3:display(); 
+ break; 
+ case 4:exit(0); 
+ break; 
+ default:printf("\n invalid choice"); 
+ break; 
+ } 
+ } 
+} 
+void begins() 
+{ 
+ int item; 
+ struct node *ptr; 
+ ptr=(struct node*)malloc(sizeof(struct node)); 
+ printf("\n Enter item:"); 
+ scanf("%d",&item); 
+ ptr->data=item; 
+ ptr->next=head; 
+ head=ptr; 
+ printf("\n Node inserted"); 
+} 
+void begdel() 
+{ 
+ struct node *ptr; 
+ if(head==NULL) 
+ { 
+ printf("\n List empty"); 
+ } 
+ else 
+ { 
+ ptr=head; 
+ head=ptr->next; 
+ free(ptr); 
+ printf("\n Node deleted"); 
+ } 
+} 
+void display() 
+{ 
+ struct node *ptr; 
+ ptr=head; 
+ if(head==NULL) 
+ printf("\n list empty"); 
+ else 
+ { 
+ printf("\n Prting valyues..."); 
+ while(ptr!=NULL) 
+ { 
+ printf("\n %d",ptr->data); 
+ ptr=ptr->next; 
+ } 
+ } 
+} 
